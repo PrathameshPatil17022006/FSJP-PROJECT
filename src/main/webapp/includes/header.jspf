@@ -1,0 +1,40 @@
+```jsp
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    String contextPath = request.getContextPath();
+    Object loggedInUser = session.getAttribute("userId");
+    Object userRole = session.getAttribute("role");
+    boolean isLoggedIn = loggedInUser != null;
+    boolean isAdmin = isLoggedIn && "ADMIN".equals(userRole);
+%>
+
+<header class="site-header">
+    <div class="nav-container">
+        <a class="brand" href="<%= contextPath %>/">
+            <span class="brand-icon">✦</span>
+            <span>Smart<span class="gradient-text">Campus</span></span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="<%= contextPath %>/">Home</a>
+            <a href="<%= contextPath %>/events">Events</a>
+            <a href="<%= contextPath %>/resources">Resources</a>
+
+            <% if (isLoggedIn) { %>
+                <a href="<%= contextPath %>/dashboard">Dashboard</a>
+
+                <% if (isAdmin) { %>
+                    <a href="<%= contextPath %>/admin">Admin</a>
+                <% } %>
+
+                <a class="nav-button"
+                   href="<%= contextPath %>/logout">Sign Out</a>
+            <% } else { %>
+                <a href="<%= contextPath %>/login">Sign In</a>
+                <a class="nav-button"
+                   href="<%= contextPath %>/register">Get Started</a>
+            <% } %>
+        </nav>
+    </div>
+</header>
+```

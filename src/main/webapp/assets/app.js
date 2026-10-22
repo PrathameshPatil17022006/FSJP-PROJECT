@@ -1,0 +1,1 @@
+// Shared client-side enhancements can be added here. Server-side validation remains authoritative.
